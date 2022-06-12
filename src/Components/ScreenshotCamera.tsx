@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react"
 import html2canvas from "html2canvas"
 import { Camera, Trash } from "phosphor-react"
+
 import { LoadingHOC } from "./LoadingHOC"
 
 interface ScreenshotCameraProps {
@@ -28,9 +29,7 @@ export function ScreenshotCamera({ screenshot, onScreenshotTook }: ScreenshotCam
           focus_ring p-1 w-10 h-10 rounded-md flex items-end justify-end text-zinc-400 hover:text-zinc-100
         `}
         style={{
-          backgroundImage: `url(${screenshot})`,
-          backgroundPosition: 'right bottom',
-          backgroundSize: 188
+          backgroundImage: `url(${screenshot})`
         }}
         onClick={() => onScreenshotTook('')}
       >

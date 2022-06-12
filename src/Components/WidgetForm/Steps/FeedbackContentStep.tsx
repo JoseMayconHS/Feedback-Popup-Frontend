@@ -1,5 +1,7 @@
 import { FormEvent, useCallback, useState } from "react"
 import { FeedbackTypeKeys, feedbackTypes } from ".."
+import { API, API_ENDPOINTERS } from "../../../services/api"
+import { LoadingHOC } from "../../LoadingHOC"
 import { ScreenshotCamera } from "../../ScreenshotCamera"
 
 interface FeedbackContentStepProps {
@@ -10,15 +12,27 @@ interface FeedbackContentStepProps {
 export function FeedbackContentStep({ feedbackType, onFeedbackSent }: FeedbackContentStepProps) {
   const [screenshot, setScreenshot] = useState('')
   const [comment, setComment] = useState('')
+  const [isSendingFeedback, setIsSendingFeedback] = useState(false)
 
   const feedbackInfo = feedbackTypes[feedbackType]
 
-  const _handleSendFeedback = useCallback((event: FormEvent) => {
+  const _handleSendFeedback = useCallback(async (event: FormEvent) => {
     event.preventDefault()
 
-    console.log({ comment, screenshot })
+    try {
+      setIsSendingFeedback(() => true)
 
-    onFeedbackSent()
+      await API.post(API_ENDPOINTERS.POST.feedback, {
+        type: feedbackInfo.name,
+        comment,
+        screenshot
+      })
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setIsSendingFeedback(() => false)
+      onFeedbackSent()
+    }
   }, [comment, screenshot])
 
   return (
@@ -48,7 +62,9 @@ export function FeedbackContentStep({ feedbackType, onFeedbackSent }: FeedbackCo
               focus_ring button
               bg-brand-500 hover:bg-brand-300 disabled:opacity-80 disabled:hover:bg-brand-500
             `}
-          >Enviar feedback</button>
+          >
+            <LoadingHOC Component={() => <>Enviar feedback</>} loading={isSendingFeedback} />
+          </button>
         </footer>
       </form>
     </>
