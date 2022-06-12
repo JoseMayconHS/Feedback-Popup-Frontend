@@ -1,4 +1,4 @@
-# NLW Return Frontend
+# Feedget
 
 Um projeto de um popup para enviar feedback do usuário.
 
