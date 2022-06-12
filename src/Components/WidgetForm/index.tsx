@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { Lightbulb, Bug, Asterisk, ArrowLeft } from 'phosphor-react'
+import { Lightbulb, Bug, Asterisk, ArrowLeft, Heart } from 'phosphor-react'
 
 import { WidgetClose } from "../WidgetClose"
 
@@ -71,12 +71,12 @@ export function WidgetForm() {
         )
       }
 
-      <footer className='text-xs text-neutral-400'>
-        Feito com amor pela {' '}
-        <a
-          href="https://rocketseat.com.br" target='_blank' rel='noopener nofollow'
-          className='underline underline-offset-1'
-        >Rocketseat</a>
+      <footer className={`
+        text-xs text-neutral-400 w-full
+        flex flex-nowrap justify-center items-center gap-2
+      `}>
+        <p>Feito com </p>
+        <Heart color='red' fill='red' weight='fill' />
       </footer>
     </div>
   )
