@@ -48,7 +48,7 @@ export function FeedbackContentStep({ feedbackType, onFeedbackSent }: FeedbackCo
             min-w-[384px] w-full min-h-[112px] text-sm
             placeholder-zinc-400 border border-zinc-600 bg-transparent
             rounded-md resize-none focus:ring-1 focus:ring-brand-500
-            scrollbar-thumb-zinc-700 scrollbar-track-transparent scrollbar-thin
+            scrollbar scrollbar-thumb-zinc-700 scrollbar-track-transparent scrollbar-thin
           `}
           placeholder='Conte com detalhes o que está acontecendo ...'
           onChange={event => setComment(event.target.value)}
